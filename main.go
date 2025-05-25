@@ -1,4 +1,4 @@
-//go:build cob
+//go:build wip
 
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
