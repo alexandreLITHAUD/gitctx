@@ -31,7 +31,8 @@ go.work
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -79,3 +80,13 @@ tags
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,vim,go
 
+# Peuliar to this project
+
+# Ignore build artifacts 
+**/dist
+
+# Ignore work in progress files
+**/wip
+
+# Ignore Generated docuentation files
+**/docs/cli-commands
