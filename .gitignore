@@ -90,3 +90,7 @@ tags
 
 # Ignore Generated docuentation files
 **/docs/cli-commands
+
+# Ignore Hugo generated files
+**/docs/resources
+**/docs/public
