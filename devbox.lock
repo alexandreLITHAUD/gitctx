@@ -53,6 +53,54 @@
       "last_modified": "2025-07-19T04:40:28Z",
       "resolved": "github:NixOS/nixpkgs/6b4955211758ba47fac850c040a27f23b9b4008f?lastModified=1752900028&narHash=sha256-dPALCtmik9Wr14MGqVXm%2BOQcv7vhPBXcWNIOThGnB%2FQ%3D"
     },
+    "go-junit-report@2.1.0": {
+      "last_modified": "2025-07-28T17:09:23Z",
+      "resolved": "github:NixOS/nixpkgs/648f70160c03151bc2121d179291337ad6bc564b#go-junit-report",
+      "source": "devbox-search",
+      "version": "2.1.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/rnj3w9jfvap1y8spsk7jvif41dddj7jc-go-junit-report-2.1.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/rnj3w9jfvap1y8spsk7jvif41dddj7jc-go-junit-report-2.1.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/xgh6bsyc41j3csnmmkixrr00jclivd72-go-junit-report-2.1.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/xgh6bsyc41j3csnmmkixrr00jclivd72-go-junit-report-2.1.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/k11nmp0pmn9ax2l112bw4zvm3c33zrm2-go-junit-report-2.1.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/k11nmp0pmn9ax2l112bw4zvm3c33zrm2-go-junit-report-2.1.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/n3arvfzzndahgl7b67rzhqda8lsk2zcx-go-junit-report-2.1.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/n3arvfzzndahgl7b67rzhqda8lsk2zcx-go-junit-report-2.1.0"
+        }
+      }
+    },
     "go-tools@2025.1.1": {
       "last_modified": "2025-07-28T17:09:23Z",
       "resolved": "github:NixOS/nixpkgs/648f70160c03151bc2121d179291337ad6bc564b#go-tools",

@@ -5,7 +5,8 @@
     "gosec@2.22.7",
     "go-tools@2025.1.1",
     "cobra-cli@1.3.0",
-    "hugo@0.148.2"
+    "hugo@0.148.2",
+    "go-junit-report@2.1.0"
   ],
   "shell": {
     "init_hook": [
@@ -22,18 +23,24 @@
         "go build -o dist/app .",
         "echo '✅ Build complete: ./dist/app'"
       ],
-      "test": ["echo '🧪 Running tests...'", "go test -v ./..."],
+      "test": ["echo '🧪 Running tests...'", "go test -v ./tests/..."],
+      "test-junit": [
+        "echo '🧪 Running tests with JUnit report...'",
+        "mkdir -p ./dist/tests",
+        "go test -v ./tests/... | go-junit-report -set-exit-code > ./dist/tests/junit-report.xml",
+        "echo '✅ JUnit report generated in: dist/tests/junit-report.xml'"
+      ],
       "coverage": [
         "echo '📊 Running tests with coverage...'",
         "mkdir -p ./dist/coverage",
-        "go test -race -coverprofile=./dist/coverage/coverage.out -covermode=atomic ./...",
+        "go test -race -coverprofile=./dist/coverage/coverage.out -covermode=atomic ./tests/...",
         "go tool cover -html=./dist/coverage/coverage.out -o ./dist/coverage/coverage.html",
         "echo '✅ Coverage report generated in : ./dist/coverage/coverage.html'"
       ],
       "benchmark": [
         "echo '⚡ Running benchmarks...'",
         "mkdir -p ./dist/benchmark",
-        "go test -bench=. -benchmem ./... | tee ./dist/benchmark/benchmark.txt",
+        "go test -bench=. -benchmem -run=^$ ./tests/... | tee ./dist/benchmark/benchmark.txt",
         "echo '✅ Benchmark results saved to ./dist/benchmark/benchmark.txt'"
       ],
       "clean": [
