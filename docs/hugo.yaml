@@ -1,6 +1,6 @@
 # hugo server --minify --themesDir ../..
 
-baseURL: http://0.0.0.0:1313/
+baseURL: https://alexandrelithaud.github.io/gitctx/
 title: Gitctx Documentation
 theme: hugo-book
 

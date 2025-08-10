@@ -1,0 +1,45 @@
+name: 📄 Deploy Documentation
+
+on:
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          extra_nix_config: |
+            max-jobs = auto
+            cores = 0
+
+      - name: Install DevBox
+        uses: jetpack-io/devbox-install-action@v0.13.0
+        with:
+          enable-cache: true
+
+      - name: Generate cobra documentation
+        run: devbox run doc-gen
+
+      - name: Build Hugo site
+        run: devbox run doc-build
+
+      - name: Deploy versioned docs to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/public
