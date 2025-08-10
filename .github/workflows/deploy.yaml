@@ -6,6 +6,9 @@ on:
             - 'v*'
 
 jobs:
+
+    # TODO: Add testing job before the release
+
     deploy-release:
         uses: ./.github/workflows/deploy-release.yaml
         secrets: inherit 
