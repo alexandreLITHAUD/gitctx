@@ -1,0 +1,41 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="
+  gitctx version
+  
+  #
+  
+
+Return your gitctx version and architecture
+
+  Synopsis
+  
+  #
+  
+
+This command return your current gitctx version, operating system, and architecture.
+It is useful to check if you are using the correct version of gitctx for your system.
+Here are tge commands to catch the version and architecture:
+For version : gitctx version -q'
+For operating system : gitctx version | awk &lsquo;{print $4}&rsquo; | cut -d/ -f1
+For architecture : gitctx version | awk &lsquo;{print $4}&rsquo; | cut -d/ -f2"><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://alexandrelithaud.github.io/gitctx/docs/commands/gitctx_version/"><meta property="og:site_name" content="Gitctx Documentation"><meta property="og:title" content="Gitctx Documentation"><meta property="og:description" content="gitctx version # Return your gitctx version and architecture
+Synopsis # This command return your current gitctx version, operating system, and architecture. It is useful to check if you are using the correct version of gitctx for your system.
+Here are tge commands to catch the version and architecture: For version : gitctx version -q' For operating system : gitctx version | awk ‘{print $4}’ | cut -d/ -f1 For architecture : gitctx version | awk ‘{print $4}’ | cut -d/ -f2"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="docs"><title>Gitctx Version | Gitctx Documentation</title><link rel=icon href=/gitctx/favicon.png><link rel=manifest href=/gitctx/manifest.json><link rel=canonical href=https://alexandrelithaud.github.io/gitctx/docs/commands/gitctx_version/><link rel=alternate hreflang=fr href=https://alexandrelithaud.github.io/gitctx/fr/docs/commands/gitctx_version/ title="Gitctx Version"><link rel=stylesheet href=/gitctx/book.min.ce742184041b67827be505801d71b6b40c09608dfb292033ea54dbbc1d71a174.css integrity="sha256-znQhhAQbZ4J75QWAHXG2tAwJYI37KSAz6lTbvB1xoXQ=" crossorigin=anonymous><script defer src=/gitctx/fuse.min.js></script><script defer src=/gitctx/en.search.min.3ca0183e69adf9c498b4b4861f654e3c0944f1c624a90a5c4c75d547654e7268.js integrity="sha256-PKAYPmmt+cSYtLSGH2VOPAlE8cYkqQpcTHXVR2VOcmg=" crossorigin=anonymous></script><script defer src=/gitctx/sw.min.e398217ba2ea3f8dc20a846b1bb33d343f5434e0e7a703c18125c16c9f018b54.js integrity="sha256-45ghe6LqP43CCoRrG7M9ND9UNODnpwPBgSXBbJ8Bi1Q=" crossorigin=anonymous></script></head><body dir=ltr class="book-kind-page book-type-docs"><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/gitctx/><span>Gitctx Documentation</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class=flex><a role=button class="flex flex-auto"><img src=/gitctx/svg/translate.svg class=book-icon alt=Languages>
+<span>English</span></a></label><ul><li><a href=/gitctx/fr/docs/commands/gitctx_version/><span>Français</span></a></li></ul></li></ul><ul><li class=book-section-flat><a href=/gitctx/docs/intro/>Documentation</a><ul></ul></li><li class=book-section-flat><a href=/gitctx/docs/commands/>Commands</a><ul><li><a href=/gitctx/docs/commands/gitctx/>Gitctx</a></li><li><a href=/gitctx/docs/commands/gitctx_add/>Gitctx Add</a></li><li><a href=/gitctx/docs/commands/gitctx_init/>Gitctx Init</a></li><li><a href=/gitctx/docs/commands/gitctx_version/ class=active>Gitctx Version</a></li></ul></li></ul><ul><li><a href=https://github.com/alexandreLITHAUD/gitctx target=_blank rel=noopener>Github</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/gitctx/svg/menu.svg class=book-icon alt=Menu></label><h3>Gitctx Version</h3><label for=toc-control><img src=/gitctx/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#gitctx-version>gitctx version</a><ul><li><a href=#synopsis>Synopsis</a></li><li><a href=#options>Options</a></li><li><a href=#options-inherited-from-parent-commands>Options inherited from parent commands</a></li><li><a href=#see-also>SEE ALSO</a></li></ul></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h2 id=gitctx-version>gitctx version
+<a class=anchor href=#gitctx-version>#</a></h2><p>Return your gitctx version and architecture</p><h3 id=synopsis>Synopsis
+<a class=anchor href=#synopsis>#</a></h3><p>This command return your current gitctx version, operating system, and architecture.
+It is useful to check if you are using the correct version of gitctx for your system.</p><p>Here are tge commands to catch the version and architecture:
+For version : gitctx version -q'
+For operating system : gitctx version | awk &lsquo;{print $4}&rsquo; | cut -d/ -f1
+For architecture : gitctx version | awk &lsquo;{print $4}&rsquo; | cut -d/ -f2</p><pre tabindex=0><code>gitctx version [flags]
+</code></pre><h3 id=options>Options
+<a class=anchor href=#options>#</a></h3><pre tabindex=0><code>  -h, --help    help for version
+  -q, --quiet   Suppress output to just version
+</code></pre><h3 id=options-inherited-from-parent-commands>Options inherited from parent commands
+<a class=anchor href=#options-inherited-from-parent-commands>#</a></h3><pre tabindex=0><code>  -v, --verbose   Enable verbose output
+</code></pre><h3 id=see-also>SEE ALSO
+<a class=anchor href=#see-also>#</a></h3><ul><li><a href=/gitctx/docs/commands/gitctx/>gitctx</a> - gitctx is a tool to manage git contexts</li></ul><h6 id=auto-generated-by-spf13cobra-on-10-aug-2025>Auto generated by spf13/cobra on 10-Aug-2025
+<a class=anchor href=#auto-generated-by-spf13cobra-on-10-aug-2025>#</a></h6></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content.en/docs/commands/gitctx_version.md target=_blank rel="noopener edit"><img src=/gitctx/svg/edit.svg class=book-icon alt>
+<span>Edit this page</span></a></div></div><div class="flex flex-wrap justify-between"><span><a href=/gitctx/docs/commands/gitctx_init/ class="flex align-center book-icon"><img src=/gitctx/svg/backward.svg class=book-icon alt=Previous title="Gitctx Init">
+<span>Gitctx Init</span>
+</a></span><span></span></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#gitctx-version>gitctx version</a><ul><li><a href=#synopsis>Synopsis</a></li><li><a href=#options>Options</a></li><li><a href=#options-inherited-from-parent-commands>Options inherited from parent commands</a></li><li><a href=#see-also>SEE ALSO</a></li></ul></li></ul></li></ul></nav></div></aside></main></body></html>
