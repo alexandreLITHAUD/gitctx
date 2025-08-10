@@ -94,3 +94,5 @@ tags
 # Ignore Hugo generated files
 **/docs/resources
 **/docs/public
+**/docs/content.fr/docs/commands/[!_]*.md
+**/docs/content.en/docs/commands/[!_]*.md

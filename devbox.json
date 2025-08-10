@@ -87,7 +87,7 @@
         "OSS_TYPE=$(cat os.os_type) || (echo 'No os.os_type found' && exit 1)",
         "ARCH_TYPE=$(cat arch.os_type) || (echo 'No arch.os_type found' && exit 1)",
         "VERSION=$(git describe --tags --always)",
-        "mkdir -p ./dist/executables",
+        "mkdir -p ./dist/executables/",
         "for os in $OSS_TYPE; do",
         "  for arch in $ARCH_TYPE; do",
         "    echo \"Building for OS: $os, ARCH: $arch\"",
