@@ -1,0 +1,19 @@
+name: 🚀 Deploy version
+
+on:
+    push:
+        tags:
+            - 'v*'
+
+jobs:
+    deploy-release:
+        uses: ./.github/workflows/deploy-release.yaml
+        secrets: inherit
+    
+    deploy-docs:
+        uses: ./.github/workflows/deploy-docs.yaml
+        secrets: inherit
+        permissions:
+            contents: write
+            pages: write
+            id-token: write
