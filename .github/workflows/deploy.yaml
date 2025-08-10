@@ -8,7 +8,9 @@ on:
 jobs:
     deploy-release:
         uses: ./.github/workflows/deploy-release.yaml
-        secrets: inherit
+        secrets: inherit 
+        permissions:
+            contents: write  # This allows creating releases
     
     deploy-docs:
         uses: ./.github/workflows/deploy-docs.yaml
