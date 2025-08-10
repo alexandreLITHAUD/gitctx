@@ -1,0 +1,15 @@
+{
+  "name": "Gitctx Documentation",
+  "short_name": "Gitctx Documentation",
+  "start_url": "/gitctx/",
+  "scope": "/gitctx/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/gitctx/favicon.svg",
+      "sizes": "512x512"
+    }
+  ]
+}

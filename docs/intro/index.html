@@ -1,0 +1,123 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content='
+  Introduction
+  
+  #
+  
+
+
+  What is gitctx?
+  
+  #
+  
+
+gitctx is a lightweight command-line tool written in Go that helps developers manage and switch between multiple Git contexts (identities) effortlessly.
+Whether you contribute to open-source projects, work across multiple companies, or just want to separate personal and professional commits, gitctx makes identity management painless.
+It centralizes your .gitconfig profiles in one place and gives you commands to:
+
+Store unlimited named Git contexts
+Apply a context globally or locally to a single repo
+Quickly toggle between your current and previous identity
+Manage SSH and GPG keys per context
+
+
+  Mermaid Diagram
+  
+  #
+  
+
+
+
+
+
+  
+
+
+
+
+flowchart TD
+    subgraph User
+        A[gitctx CLI]
+    end
+    subgraph Storage
+        B1[~/.gitctx/context-work.gitconfig]
+        B2[~/.gitctx/context-personal.gitconfig]
+        B3[~/.gitctx/metadata.json]
+    end
+    subgraph Git System
+        C1["~/.gitconfig (global)"]
+        C2[".git/config (local)"]
+    end
+    A --> |add| B1
+    A --> |add| B2
+    A --> |add| B3
+    A --> |apply <name>| C1
+    A --> |local apply <name>| C2
+    A --> |local discard| C2
+    A --> |switch| C1
+    A --> |delete| B1
+    A --> |delete| B2
+    A --> |uses metadata| B3
+    style B3 fill:#fef3c7,stroke:#fbbf24,stroke-width:2px
+    style A fill:#e0f2fe,stroke:#38bdf8,stroke-width:2px
+    style C1 fill:#dcfce7,stroke:#22c55e,stroke-width:2px
+    style C2 fill:#dcfce7,stroke:#22c55e,stroke-width:2px
+
+
+  Why use gitctx?
+  
+  #
+  
+
+Switching Git identities manually is error-prone and time-consuming. You’ve probably:'><meta name=theme-color media="(prefers-color-scheme: light)" content="#ffffff"><meta name=theme-color media="(prefers-color-scheme: dark)" content="#343a40"><meta name=color-scheme content="light dark"><meta property="og:url" content="https://alexandrelithaud.github.io/gitctx/docs/intro/"><meta property="og:site_name" content="Gitctx Documentation"><meta property="og:title" content="Documentation"><meta property="og:description" content='Introduction # What is gitctx? # gitctx is a lightweight command-line tool written in Go that helps developers manage and switch between multiple Git contexts (identities) effortlessly.
+Whether you contribute to open-source projects, work across multiple companies, or just want to separate personal and professional commits, gitctx makes identity management painless.
+It centralizes your .gitconfig profiles in one place and gives you commands to:
+Store unlimited named Git contexts Apply a context globally or locally to a single repo Quickly toggle between your current and previous identity Manage SSH and GPG keys per context Mermaid Diagram # flowchart TD subgraph User A[gitctx CLI] end subgraph Storage B1[~/.gitctx/context-work.gitconfig] B2[~/.gitctx/context-personal.gitconfig] B3[~/.gitctx/metadata.json] end subgraph Git System C1["~/.gitconfig (global)"] C2[".git/config (local)"] end A --> |add| B1 A --> |add| B2 A --> |add| B3 A --> |apply <name>| C1 A --> |local apply <name>| C2 A --> |local discard| C2 A --> |switch| C1 A --> |delete| B1 A --> |delete| B2 A --> |uses metadata| B3 style B3 fill:#fef3c7,stroke:#fbbf24,stroke-width:2px style A fill:#e0f2fe,stroke:#38bdf8,stroke-width:2px style C1 fill:#dcfce7,stroke:#22c55e,stroke-width:2px style C2 fill:#dcfce7,stroke:#22c55e,stroke-width:2px Why use gitctx? # Switching Git identities manually is error-prone and time-consuming. You’ve probably:'><meta property="og:locale" content="en"><meta property="og:type" content="website"><title>Documentation | Gitctx Documentation</title><link rel=icon href=/gitctx/favicon.png><link rel=manifest href=/gitctx/manifest.json><link rel=canonical href=https://alexandrelithaud.github.io/gitctx/docs/intro/><link rel=alternate hreflang=fr href=https://alexandrelithaud.github.io/gitctx/fr/docs/intro/ title=Documentation><link rel=stylesheet href=/gitctx/book.min.ce742184041b67827be505801d71b6b40c09608dfb292033ea54dbbc1d71a174.css integrity="sha256-znQhhAQbZ4J75QWAHXG2tAwJYI37KSAz6lTbvB1xoXQ=" crossorigin=anonymous><script defer src=/gitctx/fuse.min.js></script><script defer src=/gitctx/en.search.min.83a7fad7645d1f75a324f5090db073ece03fea4b63c34dbaac529dd89e61878a.js integrity="sha256-g6f612RdH3WjJPUJDbBz7OA/6ktjw026rFKd2J5hh4o=" crossorigin=anonymous></script><script defer src=/gitctx/sw.min.e398217ba2ea3f8dc20a846b1bb33d343f5434e0e7a703c18125c16c9f018b54.js integrity="sha256-45ghe6LqP43CCoRrG7M9ND9UNODnpwPBgSXBbJ8Bi1Q=" crossorigin=anonymous></script><link rel=alternate type=application/rss+xml href=https://alexandrelithaud.github.io/gitctx/docs/intro/index.xml title="Gitctx Documentation"></head><body dir=ltr class="book-kind-section book-type-docs"><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/gitctx/><span>Gitctx Documentation</span></a></h2><div class="book-search hidden"><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><script>document.querySelector(".book-search").classList.remove("hidden")</script><ul class=book-languages><li><input type=checkbox id=languages class=toggle>
+<label for=languages class=flex><a role=button class="flex flex-auto"><img src=/gitctx/svg/translate.svg class=book-icon alt=Languages>
+<span>English</span></a></label><ul><li><a href=/gitctx/fr/docs/intro/><span>Français</span></a></li></ul></li></ul><ul><li class=book-section-flat><a href=/gitctx/docs/intro/ class=active>Documentation</a><ul></ul></li><li class=book-section-flat><a href=/gitctx/docs/commands/>Commands</a><ul><li><a href=/gitctx/docs/commands/gitctx/>Gitctx</a></li><li><a href=/gitctx/docs/commands/gitctx_add/>Gitctx Add</a></li></ul></li></ul><ul><li><a href=https://github.com/alexandreLITHAUD/gitctx target=_blank rel=noopener>Github</a></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/gitctx/svg/menu.svg class=book-icon alt=Menu></label><h3>Documentation</h3><label for=toc-control><img src=/gitctx/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><a href=#introduction>Introduction</a><ul><li><a href=#what-is-gitctx>What is gitctx?</a></li><li><a href=#mermaid-diagram>Mermaid Diagram</a></li><li><a href=#why-use-gitctx>Why use gitctx?</a></li><li><a href=#how-it-works>How it works</a></li><li><a href=#example-usage>Example usage</a></li></ul></li></ul></nav></aside></header><article class="markdown book-article"><h1 id=introduction>Introduction
+<a class=anchor href=#introduction>#</a></h1><h2 id=what-is-gitctx>What is gitctx?
+<a class=anchor href=#what-is-gitctx>#</a></h2><p><code>gitctx</code> is a lightweight command-line tool written in Go that helps developers <strong>manage and switch between multiple Git contexts</strong> (identities) effortlessly.<br>Whether you contribute to open-source projects, work across multiple companies, or just want to separate personal and professional commits, <code>gitctx</code> makes identity management painless.</p><p>It centralizes your <code>.gitconfig</code> profiles in one place and gives you commands to:</p><ul><li>Store unlimited named Git contexts</li><li>Apply a context <strong>globally</strong> or <strong>locally</strong> to a single repo</li><li>Quickly toggle between your current and previous identity</li><li>Manage SSH and GPG keys per context</li></ul><h2 id=mermaid-diagram>Mermaid Diagram
+<a class=anchor href=#mermaid-diagram>#</a></h2><script src=/gitctx/mermaid.min.js></script><script>mermaid.initialize({flowchart:{useMaxWidth:!0},theme:"default"})</script><pre class=mermaid>flowchart TD
+    subgraph User
+        A[gitctx CLI]
+    end
+    subgraph Storage
+        B1[~/.gitctx/context-work.gitconfig]
+        B2[~/.gitctx/context-personal.gitconfig]
+        B3[~/.gitctx/metadata.json]
+    end
+    subgraph Git System
+        C1[&#34;~/.gitconfig (global)&#34;]
+        C2[&#34;.git/config (local)&#34;]
+    end
+    A --&gt; |add| B1
+    A --&gt; |add| B2
+    A --&gt; |add| B3
+    A --&gt; |apply &lt;name&gt;| C1
+    A --&gt; |local apply &lt;name&gt;| C2
+    A --&gt; |local discard| C2
+    A --&gt; |switch| C1
+    A --&gt; |delete| B1
+    A --&gt; |delete| B2
+    A --&gt; |uses metadata| B3
+    style B3 fill:#fef3c7,stroke:#fbbf24,stroke-width:2px
+    style A fill:#e0f2fe,stroke:#38bdf8,stroke-width:2px
+    style C1 fill:#dcfce7,stroke:#22c55e,stroke-width:2px
+    style C2 fill:#dcfce7,stroke:#22c55e,stroke-width:2px</pre><hr><h2 id=why-use-gitctx>Why use gitctx?
+<a class=anchor href=#why-use-gitctx>#</a></h2><p>Switching Git identities manually is error-prone and time-consuming. You’ve probably:</p><ul><li>Committed with the wrong email to the wrong repo</li><li>Spent time editing <code>.gitconfig</code> by hand</li><li>Forgotten to switch back to your personal profile before pushing</li></ul><p>With <code>gitctx</code>, you can:</p><ul><li>Change identities in seconds</li><li>Keep your Git configs <strong>organized</strong> and <strong>easy to back up</strong></li><li>Avoid costly mistakes by clearly tracking your current identity</li><li>Integrate with tools like <strong>LazyGit</strong> for even smoother workflows</li></ul><hr><h2 id=how-it-works>How it works
+<a class=anchor href=#how-it-works>#</a></h2><p><code>gitctx</code> stores your contexts in <code>~/.gitctx/</code> as plain <code>.gitconfig</code> files and tracks metadata like:</p><ul><li>The <strong>current</strong> context in use</li><li>The <strong>previous</strong> context (for quick switching)</li></ul><p>When you apply a context:</p><ul><li><strong>Global mode</strong> updates your main <code>~/.gitconfig</code></li><li><strong>Local mode</strong> applies only to the nearest repository (<code>.git/config</code>)</li></ul><p>Because contexts are just <code>.gitconfig</code> files, you can edit them manually or import/export them easily.</p><hr><h2 id=example-usage>Example usage
+<a class=anchor href=#example-usage>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e># Create a new context interactively</span>
+</span></span><span style=display:flex><span>gitctx add work
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Apply it globally</span>
+</span></span><span style=display:flex><span>gitctx apply work
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Switch back to your previous context</span>
+</span></span><span style=display:flex><span>gitctx switch
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Apply a context only for the current repository</span>
+</span></span><span style=display:flex><span>gitctx local apply personal
+</span></span></code></pre></div></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://github.com/alex-shpak/hugo-book/commit/26344928dfe248fb924db747080de1c15dd7f5a9 title='Last modified by Alexandre Lithaud | August 10, 2025' target=_blank rel=noopener><img src=/gitctx/svg/calendar.svg class=book-icon alt>
+<span>August 10, 2025</span></a></div><div><a class="flex align-center" href=https://github.com/alex-shpak/hugo-book/edit/main/exampleSite/content.en/docs/intro/_index.md target=_blank rel="noopener edit"><img src=/gitctx/svg/edit.svg class=book-icon alt>
+<span>Edit this page</span></a></div></div><div class="flex flex-wrap justify-between"><span></span><span><a href=/gitctx/docs/commands/ class="flex align-center book-icon"><span>Commands</span>
+<img src=/gitctx/svg/forward.svg class=book-icon alt=Next title=Commands></a></span></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><a href=#introduction>Introduction</a><ul><li><a href=#what-is-gitctx>What is gitctx?</a></li><li><a href=#mermaid-diagram>Mermaid Diagram</a></li><li><a href=#why-use-gitctx>Why use gitctx?</a></li><li><a href=#how-it-works>How it works</a></li><li><a href=#example-usage>Example usage</a></li></ul></li></ul></nav></div></aside></main></body></html>
