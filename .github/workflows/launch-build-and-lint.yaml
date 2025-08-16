@@ -4,6 +4,9 @@ on:
     workflow_call:
     workflow_dispatch:
 
+permissions:
+    security-events: write
+
 jobs:
     build-and-lint:
         runs-on: ubuntu-latest
