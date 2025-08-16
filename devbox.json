@@ -57,11 +57,13 @@
       "fmt": ["echo '🎨 Formatting Go code...'", "go fmt ./..."],
       "lint": [
         "echo '🔍 Linting Go code...'",
-        "go vet ./...",
-        "staticcheck ./..."
+        "mkdir -p ./dist/lint",
+        "go vet ./... 2>&1 | tee ./dist/lint/vet-report.txt",
+        "staticcheck ./... 2>&1 | tee ./dist/lint/staticcheck-report.txt"
       ],
       "security": [
         "echo '🔒 Running security checks with gosec...'",
+        "mkdir -p ./dist/security",
         "gosec --no-fail -fmt sarif -out ./dist/security/security-report.sarif ./..."
       ],
       "doc-gen": [

@@ -76,10 +76,6 @@ jobs:
                 message: ${{ env.COVERAGE }}
                 color: ${{ env.COVERAGE >= '80%' && 'green' || env.COVERAGE >= '60%' && 'yellow' || 'red' }}
 
-            - name: Run security checks
-              run: |
-                devbox run security
-
             - name: Run Benchmarks
               run: |
                 devbox run benchmark
@@ -89,11 +85,6 @@ jobs:
                 echo '```' >> $GITHUB_STEP_SUMMARY
                 cat artifacts/benchmarks.txt >> $GITHUB_STEP_SUMMARY
                 echo '```' >> $GITHUB_STEP_SUMMARY
-
-            - name: Upload Security SARIF file
-              uses: github/codeql-action/upload-sarif@v3
-              with:
-                sarif_file: ./dist/security/security-report.sarif
 
             - name: Show Unit Test Report
               uses: dorny/test-reporter@v2

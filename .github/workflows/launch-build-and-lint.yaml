@@ -24,14 +24,18 @@ jobs:
               with:
                 enable-cache: true
             
-            - name: Run Formatter
-              continue-on-error: true
-              run: |
-                devbox run fmt
-
             - name: Run Linting
               continue-on-error: true
               run: devbox run lint
             
             - name: Run Build
               run: devbox run build
+
+            - name: Run security checks
+              run: |
+                devbox run security 
+
+            - name: Upload Security SARIF file
+              uses: github/codeql-action/upload-sarif@v3
+              with:
+                sarif_file: ./dist/security/security-report.sarif

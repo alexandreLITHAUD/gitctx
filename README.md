@@ -2,7 +2,7 @@
 
 A CLI tool for easily managing and switching between multiple Git contexts.
 
-![Build](https://github.com/alexandreLITHAUD/Own-Git/actions/workflows/launch-CI.yaml/badge.svg)
+![Build](https://github.com/alexandreLITHAUD/gitctx/actions/workflows/launch-CI.yaml/badge.svg)
 ![Tests](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/alexandreLITHAUD/3aff3ab94739bdcdd6a9640f0150eeda/raw/gitctx-tests.json)
 ![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/alexandreLITHAUD/3aff3ab94739bdcdd6a9640f0150eeda/raw/gitctx-coverage.json)
 
