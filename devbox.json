@@ -33,7 +33,7 @@
       "coverage": [
         "echo '📊 Running tests with coverage...'",
         "mkdir -p ./dist/coverage",
-        "go test -race -coverprofile=./dist/coverage/coverage.out -covermode=atomic ./tests/...",
+        "go test -race -coverprofile=./dist/coverage/coverage.out -covermode=atomic -coverpkg=./... ./tests/...",
         "go tool cover -html=./dist/coverage/coverage.out -o ./dist/coverage/coverage.html",
         "echo '✅ Coverage report generated in : ./dist/coverage/coverage.html'"
       ],

@@ -6,21 +6,21 @@ import (
 )
 
 var configFolderPathOverride string
-var homeFolderOverride string
+var homeFolderPathOverride string
 
 func OverrideConfigFolderPath(path string) {
 	configFolderPathOverride = path
 }
 
 func OverrideHomeFolderPath(path string) {
-	homeFolderOverride = path
+	homeFolderPathOverride = path
 }
 
 func GetHomeFolderPath() string {
 	var homeDirPath string
 
-	if configFolderPathOverride != "" {
-		homeDirPath = configFolderPathOverride
+	if homeFolderPathOverride != "" {
+		homeDirPath = homeFolderPathOverride
 	} else {
 		var err error
 		homeDirPath, err = os.UserHomeDir()
@@ -69,7 +69,7 @@ func FindGitConfigsFilePaths() ([]string, error) {
 	return gitConfigsPaths, nil
 }
 
-func GetAllGitctxContexts(name string) []string {
+func GetAllGitctxContexts() []string {
 
 	var contexts []string = make([]string, 0)
 
