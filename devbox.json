@@ -35,6 +35,7 @@
         "mkdir -p ./dist/coverage",
         "go test -race -coverprofile=./dist/coverage/coverage.out -covermode=atomic -coverpkg=./... ./tests/...",
         "go tool cover -html=./dist/coverage/coverage.out -o ./dist/coverage/coverage.html",
+        "go tool cover -func=./dist/coverage/coverage.out | grep total | awk '{print $3}' > ./dist/coverage/coverage.txt",
         "echo '✅ Coverage report generated in : ./dist/coverage/coverage.html'"
       ],
       "benchmark": [
@@ -61,7 +62,7 @@
       ],
       "security": [
         "echo '🔒 Running security checks with gosec...'",
-        "gosec ./..."
+        "gosec --no-fail -fmt sarif -out ./dist/security/security-report.sarif ./..."
       ],
       "doc-gen": [
         "echo '📄 Generating documentation...'",

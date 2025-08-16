@@ -1,0 +1,37 @@
+name: 📦 Launch Build and Lint
+
+on:
+    workflow_call:
+    workflow_dispatch:
+
+jobs:
+    build-and-lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+            
+            - name: Install Nix
+              uses: cachix/install-nix-action@v31
+              with:
+                github_access_token: ${{ secrets.GITHUB_TOKEN }}
+                extra_nix_config: |
+                  max-jobs = auto
+                  cores = 0
+            
+            - name: Install DevBox
+              uses: jetpack-io/devbox-install-action@v0.13.0
+              with:
+                enable-cache: true
+            
+            - name: Run Formatter
+              continue-on-error: true
+              run: |
+                devbox run fmt
+
+            - name: Run Linting
+              continue-on-error: true
+              run: devbox run lint
+            
+            - name: Run Build
+              run: devbox run build

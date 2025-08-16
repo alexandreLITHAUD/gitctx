@@ -1,10 +1,16 @@
-# gitctx
+# gitctx 👽
 
 A CLI tool for easily managing and switching between multiple Git contexts.
+
+![Build](https://github.com/alexandreLITHAUD/Own-Git/actions/workflows/launch-CI.yaml/badge.svg)
+![Tests](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/alexandreLITHAUD/3aff3ab94739bdcdd6a9640f0150eeda/raw/gitctx-tests.json)
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/alexandreLITHAUD/3aff3ab94739bdcdd6a9640f0150eeda/raw/gitctx-coverage.json)
 
 ## 📖 About
 
 `gitctx` is a command-line utility written in Go that allows you to store and switch between different Git configurations. It's particularly useful for developers who work on different projects requiring distinct Git identities.
+
+Link of the documentation : https://alexandrelithaud.github.io/gitctx
 
 ## 🌟 Features
 
@@ -14,6 +20,17 @@ A CLI tool for easily managing and switching between multiple Git contexts.
 - Apply a context globally or for a specific directory
 - Share common configurations between contexts
 - Intuitive command-line interface based on Cobra
+- Fetch common .gitconfig location for adding as contexts
+
+## 📁 Context Storage
+
+- Contexts are stored in `~/.gitctx/`.
+- Each file represents a full Git configuration (`gitconfig`) and is named by the user.
+- An internal metadata file tracks:
+  - The **current** context.
+  - The **last used** context (used for quick switching).
+
+All context files are plain `.gitconfig` files and can be edited manually if needed.
 
 ## 🚀 Installation
 
@@ -65,7 +82,7 @@ gitctx create other-project --name "John Doe" --email "john@example.com" --use-c
 ### Show current context
 
 ```bash
-gitctx current
+gitctx show
 ```
 
 ## ⚙️ Configuration
@@ -78,15 +95,35 @@ Contributions are welcome! Feel free to open an issue or pull request.
 
 ## 🚀 Future Improvements
 
-- **Templates management**: Add ability to create context templates for easier setup of similar configurations
-- **Export/import functionality**: Commands to export and import contexts for sharing between machines
-- **Auto-detection**: Feature to automatically detect appropriate context based on repository details
-- **Integration with other tools**: Consider integration with key managers or tools like direnv
-- **Hooks**: Add the ability to define hooks that run when changing contexts
-- **Interactive interface**: Interactive command (using a library like promptui) for easier context creation and selection
-- **Change history**: Keep a history of context changes to easily revert to previous contexts
-- **Cloud synchronization**: Option to securely sync contexts (without sensitive keys) via cloud services
-- **Alternative key management**: Instead of generating SSH/GPG keys directly, consider using system commands or allowing import of existing keys for better security
+### 🔄 Git Hook Integration
+
+- Add a `post-commit` hook that logs the context used at the time of commit.
+- Or a `prepare-commit-msg` hook to prefix commits with context info (e.g., `[Work]`, `[Personal]`).
+
+### 🔐 Encrypted SSH Key Storage !!!
+
+- Option to encrypt SSH keys inside context files using tools like Age or SOPS.
+- Keep the private key encrypted until apply. When done remove the one of the other context, decrypt, and add it to SSH agent. So not scyptes totally only when not used.
+- Useful for syncing across machines safely.
+
+### ☁️ Remote Sync (future idea)
+
+- Sync contexts between devices via:
+  - Git repository (with encrypted files).
+  - Dotfiles manager.
+  - Cloud storage (Dropbox, etc.).
+
+### 🧠 Smart Context Detection
+
+- Detect potential mistakes (e.g., wrong email for a repo).
+- Suggests or applies a context based on the Git remote (e.g., `github.com/company` → use work context).
+
+### 🧩 LazyGit Plugin Support
+
+- Create a plugin or wrapper for [LazyGit](https://github.com/jesseduffield/lazygit) to:
+  - Display current context in the UI.
+  - Switch contexts from within LazyGit.
+  - Warn when a context mismatch is detected.
 
 ## 📄 License
 

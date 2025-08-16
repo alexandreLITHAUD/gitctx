@@ -1,0 +1,105 @@
+name: 🧪 Launch Tests
+
+on:
+    workflow_call:
+    workflow_dispatch:
+
+permissions:
+    security-events: write
+
+jobs:
+    tests:
+        runs-on: ubuntu-latest
+        steps:
+        
+            - name: Checkout Code
+              uses: actions/checkout@v4
+            
+            - name: Install Nix
+              uses: cachix/install-nix-action@v31
+              with:
+                github_access_token: ${{ secrets.GITHUB_TOKEN }}
+                extra_nix_config: |
+                  max-jobs = auto
+                  cores = 0
+            
+            - name: Install DevBox
+              uses: jetpack-io/devbox-install-action@v0.13.0
+              with:
+                enable-cache: true
+            
+            - name: Run Unit tests
+              run: |
+                devbox run test-junit
+
+                # Count passing tests
+                TESTS_TOTAL=$(grep -c "<testcase" ./dist/tests/junit-report.xml) || echo 0
+                TESTS_FAILED=$(grep -c "<failure" ./dist/tests/junit-report.xml) || echo 0 
+
+                TESTS_PASSED=$((TESTS_TOTAL - TESTS_FAILED))
+                
+                # Calculate percentage safely
+                if [ $TESTS_TOTAL -eq 0 ]; then
+                    TESTS_PERCENTAGE=100
+                else
+                    TESTS_PERCENTAGE=$((TESTS_PASSED * 100 / TESTS_TOTAL))
+                fi
+                
+                echo "TESTS_TOTAL=$TESTS_TOTAL" >> $GITHUB_ENV
+                echo "TESTS_PASSED=$TESTS_PASSED" >> $GITHUB_ENV
+                echo "TESTS_PERCENTAGE=$TESTS_PERCENTAGE" >> $GITHUB_ENV
+            
+            - name: Create Test Badge
+              uses: schneegans/dynamic-badges-action@v1.7.0
+              with:
+                auth: ${{ secrets.GIST_SECRET }}
+                gistID: 3aff3ab94739bdcdd6a9640f0150eeda
+                filename: gitctx-tests.json
+                label: Unit-Test
+                message: ${{ env.TESTS_PASSED }}/${{ env.TESTS_TOTAL }} (${{ env.TESTS_PERCENTAGE }}%)
+                color: ${{ env.TESTS_PERCENTAGE == '100' && 'brightgreen' || env.TESTS_PERCENTAGE >= '90' && 'green' || env.TESTS_PERCENTAGE >= '80' && 'yellowgreen' || env.TESTS_PERCENTAGE >= '70' && 'yellow' || env.TESTS_PERCENTAGE >= '60' && 'orange' || 'red' }}
+
+            - name: Run tests with coverage
+              run: |
+                devbox run coverage
+
+                COVERAGE_PCT=$(cat ./dist/coverage/coverage.txt)
+                echo "COVERAGE=$COVERAGE_PCT" >> $GITHUB_ENV
+
+            - name: Create Coverage Badge
+              uses: schneegans/dynamic-badges-action@v1.7.0
+              with:
+                auth: ${{ secrets.GIST_SECRET }}
+                gistID: 3aff3ab94739bdcdd6a9640f0150eeda
+                filename: gitctx-coverage.json
+                label: Coverage
+                message: ${{ env.COVERAGE }}
+                color: ${{ env.COVERAGE >= '80%' && 'green' || env.COVERAGE >= '60%' && 'yellow' || 'red' }}
+
+            - name: Run security checks
+              run: |
+                devbox run security
+
+            - name: Run Benchmarks
+              run: |
+                devbox run benchmark
+
+                # Add benchmarks to summary
+                echo "## Benchmark Results" >> $GITHUB_STEP_SUMMARY
+                echo '```' >> $GITHUB_STEP_SUMMARY
+                cat artifacts/benchmarks.txt >> $GITHUB_STEP_SUMMARY
+                echo '```' >> $GITHUB_STEP_SUMMARY
+
+            - name: Upload Security SARIF file
+              uses: github/codeql-action/upload-sarif@v3
+              with:
+                sarif_file: ./dist/security/security-report.sarif
+
+            - name: Show Unit Test Report
+              uses: dorny/test-reporter@v2
+              if: success() || failure()  
+              with:
+                name: Gitctx Tests (Unit Tests)       
+                path: ./dist/tests/junit-report.xml 
+                reporter: java-junit       
+            

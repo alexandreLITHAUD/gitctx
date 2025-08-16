@@ -1,0 +1,29 @@
+name: 🐳 Launch the full CI
+
+on:
+    push:
+        branches: [ main ]
+        paths-ignore:
+          - 'docs/**'
+          - '**.md'
+          - '.github/**'
+    pull_request:
+        branches: [ main ]
+        paths-ignore:
+          - 'docs/**'
+          - '**.md'
+          - '.github/**'
+    workflow_dispatch:
+
+jobs:
+    build-and-lint:
+        uses: ./.github/workflows/launch-build-and-lint.yaml
+        secrets: inherit
+        permissions:
+            contents: write
+
+    tests:
+        uses: ./.github/workflows/launch-tests.yaml
+        secrets: inherit
+        permissions:
+            security-events: write
