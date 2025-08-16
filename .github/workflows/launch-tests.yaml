@@ -66,6 +66,12 @@ jobs:
                 COVERAGE_PCT=$(cat ./dist/coverage/coverage.txt)
                 echo "COVERAGE=$COVERAGE_PCT" >> $GITHUB_ENV
 
+                # Add Coverage to summary
+                echo "## Coverage Results" >> $GITHUB_STEP_SUMMARY
+                echo '```' >> $GITHUB_STEP_SUMMARY
+                cat ./dist/coverage/coverage-logs.txt >> $GITHUB_STEP_SUMMARY
+                echo '```' >> $GITHUB_STEP_SUMMARY
+
             - name: Create Coverage Badge
               uses: schneegans/dynamic-badges-action@v1.7.0
               with:
