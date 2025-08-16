@@ -83,7 +83,7 @@ jobs:
                 # Add benchmarks to summary
                 echo "## Benchmark Results" >> $GITHUB_STEP_SUMMARY
                 echo '```' >> $GITHUB_STEP_SUMMARY
-                cat artifacts/benchmarks.txt >> $GITHUB_STEP_SUMMARY
+                cat ./dist/benchmark/benchmark.txt >> $GITHUB_STEP_SUMMARY
                 echo '```' >> $GITHUB_STEP_SUMMARY
 
             - name: Show Unit Test Report
