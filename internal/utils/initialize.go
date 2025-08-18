@@ -49,8 +49,7 @@ func InitializeGitctxConfigFolder(excludeFetch bool) error {
 				return fmt.Errorf("error reading context name input: %w", err)
 			}
 
-			CreateGitctxContextFile(name, path)
-			fmt.Printf("Context '%s' created from config file: %s\n", name, path)
+			CreateGitctxContextFileFromPath(name, path)
 		}
 	}
 	fmt.Println("Initialization complete !")

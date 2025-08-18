@@ -34,7 +34,7 @@ func CreateGitctxConfigFolder() error {
 	return nil
 }
 
-func CreateGitctxContextFile(name string, path string) error {
+func CreateGitctxContextFileFromPath(name string, path string) error {
 
 	contextFilePath := filepath.Join(paths.GetGitctxConfigFolderPath(), name)
 
