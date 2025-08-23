@@ -49,7 +49,7 @@ func UpdateCurrentContextName(newContextName string) error {
 
 	config.CurrentContext = newContextName
 
-	jsonData, err := json.Marshal(config)
+	jsonData, err := json.MarshalIndent(config, "", "  ")
 	if err != nil {
 		return err
 	}

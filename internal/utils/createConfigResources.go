@@ -45,7 +45,7 @@ func CreateGitctxConfigFolder() error {
 			CurrentContext: "",
 		}
 
-		jsonData, err := json.Marshal(config)
+		jsonData, err := json.MarshalIndent(config, "", "  ")
 		if err != nil {
 			return err
 		}
