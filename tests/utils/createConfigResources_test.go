@@ -25,6 +25,12 @@ func TestCreateGitctxConfigFolder(t *testing.T) {
 		t.Fatalf("Gitctx config folder does not exist at path: %s", configDir)
 	}
 
+	// Check if the .config.json file was created
+	configFilePath := filepath.Join(configDir, ".config.json")
+	if _, err := os.Stat(configFilePath); os.IsNotExist(err) {
+		t.Fatalf(".config.json file does not exist at path: %s", configFilePath)
+	}
+
 	// Test creating a context file
 	contextName := "testContext"
 	contextPath := filepath.Join(tempDir, "testContextFile")

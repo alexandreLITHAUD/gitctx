@@ -20,7 +20,7 @@ func BenchmarkGetGitctxFolderConfig(b *testing.B) {
 	}
 }
 
-func BenchmarkGetGitctxContexts(b *testing.B) {
+func BenchmarkListGitctxContexts(b *testing.B) {
 	tempDir := b.TempDir()
 	paths.OverrideConfigFolderPath(tempDir)
 
@@ -42,6 +42,6 @@ func BenchmarkGetGitctxContexts(b *testing.B) {
 
 	// Benchmark the GetAllGitctxContexts function
 	for i := 0; i < b.N; i++ {
-		_ = paths.GetAllGitctxContexts()
+		_ = paths.ListAllGitctxContexts()
 	}
 }

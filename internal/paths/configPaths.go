@@ -69,7 +69,7 @@ func FindGitConfigsFilePaths() ([]string, error) {
 	return gitConfigsPaths, nil
 }
 
-func GetAllGitctxContexts() []string {
+func ListAllGitctxContexts() []string {
 
 	var contexts []string = make([]string, 0)
 
@@ -79,7 +79,7 @@ func GetAllGitctxContexts() []string {
 	}
 
 	for _, entry := range entries {
-		if !entry.IsDir() {
+		if !entry.IsDir() && entry.Name()[0] != '.' {
 			contexts = append(contexts, entry.Name())
 		}
 	}

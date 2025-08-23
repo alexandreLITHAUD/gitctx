@@ -124,7 +124,7 @@ func TestGetAllGitctxContexts(t *testing.T) {
 
 	utils.CreateGitctxConfigFolder()
 
-	contexts := paths.GetAllGitctxContexts()
+	contexts := paths.ListAllGitctxContexts()
 	if len(contexts) != 0 {
 		t.Error("Expected no contexts initially")
 	}
@@ -139,7 +139,7 @@ func TestGetAllGitctxContexts(t *testing.T) {
 		t.Fatalf("Failed to create context file 2: %v", err)
 	}
 
-	contexts = paths.GetAllGitctxContexts()
+	contexts = paths.ListAllGitctxContexts()
 	if len(contexts) != 2 {
 		t.Errorf("Expected 2 contexts, got %d", len(contexts))
 	} else {

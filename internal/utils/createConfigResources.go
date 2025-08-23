@@ -1,12 +1,14 @@
 package utils
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
 
 	"github.com/alexandreLITHAUD/gitctx/internal/paths"
+	gitctxTypes "github.com/alexandreLITHAUD/gitctx/internal/types"
 	"github.com/alexandreLITHAUD/gitctx/internal/ui"
 )
 
@@ -31,6 +33,29 @@ func CreateGitctxConfigFolder() error {
 			return err
 		}
 	}
+
+	if _, err := os.Stat(filepath.Join(configDir, ".config.json")); os.IsNotExist(err) {
+		configFile, err := os.Create(filepath.Join(configDir, ".config.json"))
+		if err != nil {
+			return err
+		}
+		defer configFile.Close()
+
+		var config gitctxTypes.Config = gitctxTypes.Config{
+			CurrentContext: "",
+		}
+
+		jsonData, err := json.Marshal(config)
+		if err != nil {
+			return err
+		}
+
+		_, err = configFile.WriteString(string(jsonData))
+		if err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -38,7 +63,7 @@ func CreateGitctxContextFileFromPath(name string, path string) error {
 
 	contextFilePath := filepath.Join(paths.GetGitctxConfigFolderPath(), name)
 
-	if _, err := os.Stat(contextFilePath); err == nil {
+	if DoesContextFileExists(name) {
 		fmt.Printf("Context '%s' already exists. Would you like to override it ?.\n", name)
 		confirmed, err := ui.PromptForConfirmation("Answer (y)es or (n)o :")
 		if err != nil {
