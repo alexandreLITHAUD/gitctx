@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
@@ -66,4 +67,35 @@ func TestCreateGitctxContextFromScratch(t *testing.T) {
 	}
 
 	t.Logf("TestCreateGitctxContextFromScratch Passed !")
+}
+
+func TestCreateGitctxContextFileFromPath(t *testing.T) {
+
+	tempDir := t.TempDir()
+	paths.OverrideConfigFolderPath(tempDir)
+
+	// Create a temporary gitctx config folder
+	if err := utils.CreateGitctxConfigFolder(); err != nil {
+		t.Fatalf("Failed to create gitctx config folder: %v", err)
+	}
+
+	// Create a mock context file
+	contextName := "testContext"
+	contextPath := filepath.Join(tempDir, "testContextFile")
+	if err := os.WriteFile(contextPath, []byte("test context data"), 0644); err != nil {
+		t.Fatalf("Failed to create mock context file: %v", err)
+	}
+
+	// Test creating the context file from the path
+	if err := utils.CreateGitctxContextFileFromPath(contextName, contextPath); err != nil {
+		t.Fatalf("Failed to create context file from path: %v", err)
+	}
+
+	// Verify the context file was created in the config folder
+	configDir := paths.GetGitctxConfigFolderPath()
+	if _, err := os.Stat(filepath.Join(configDir, contextName)); os.IsNotExist(err) {
+		t.Fatalf("Context file '%s' was not created in the config folder", contextName)
+	}
+
+	fmt.Println("TestCreateGitctxContextFileFromPath completed successfully!")
 }

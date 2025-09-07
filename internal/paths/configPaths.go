@@ -7,6 +7,7 @@ import (
 
 var configFolderPathOverride string
 var homeFolderPathOverride string
+var gitfolderPathOverride string
 
 func OverrideConfigFolderPath(path string) {
 	configFolderPathOverride = path
@@ -14,6 +15,10 @@ func OverrideConfigFolderPath(path string) {
 
 func OverrideHomeFolderPath(path string) {
 	homeFolderPathOverride = path
+}
+
+func OverrideLocalGitFolderPath(path string) {
+	gitfolderPathOverride = path
 }
 
 func GetHomeFolderPath() string {
@@ -48,6 +53,35 @@ func GetConfigFolderPath() string {
 
 func GetGitctxConfigFolderPath() string {
 	return filepath.Join(GetConfigFolderPath(), "gitctx")
+}
+
+func GetLocalGitFolderPath() string {
+	var gitDirPath string
+	if gitfolderPathOverride != "" {
+		gitDirPath = gitfolderPathOverride
+	} else {
+
+		path, err := filepath.Abs(".")
+		if err != nil {
+			return ""
+		}
+
+		for {
+			gitPath := filepath.Join(path, ".git")
+			info, err := os.Stat(gitPath)
+			if err == nil && info.IsDir() {
+				return gitPath
+			}
+
+			parent := filepath.Dir(path)
+			if parent == path { // reached filesystem root
+				break
+			}
+			path = parent
+		}
+
+	}
+	return gitDirPath
 }
 
 func FindGitConfigsFilePaths() ([]string, error) {
