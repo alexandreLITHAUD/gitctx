@@ -122,7 +122,7 @@ func ApplyContext(global bool) error {
 			return err
 		}
 	} else {
-		configFile, err = os.OpenFile(filepath.Join(paths.GetLocalGitFolderPath(), "config"), os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
+		configFile, err = os.OpenFile(filepath.Join(paths.GetLocalGitFolderPath(), "config"), os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
 		if err != nil {
 			return err
 		}
