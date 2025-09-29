@@ -24,7 +24,7 @@ jobs:
                   cores = 0
             
             - name: Install DevBox
-              uses: jetpack-io/devbox-install-action@v0.13.0
+              uses: jetpack-io/devbox-install-action@v0.14.0
               with:
                 enable-cache: true
             
